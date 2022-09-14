@@ -40,10 +40,19 @@ public class Exemplo implements Initializable{
 
         String sNumero = tfNumero.getText();
 
-
-        double numero = Double.valueOf(sNumero); //converte a string digitada em double.
-        //Para converter para int, utilize Integer.valueOf(sNumero)
-
+        //tenta fazer a conversão do texto para número
+        double numero = 0;
+        try{
+            numero = Double.valueOf(sNumero); //converte a string digitada em double.
+            //Para converter para int, utilize Integer.valueOf(sNumero)
+        }catch(NumberFormatException e){
+            //se o usuário digitou um número inválido, com letra ou outra coisa
+            //gera um erro e para a execução.
+            Alert alert = new Alert(AlertType.INFORMATION,"Número inválido!");
+            alert.showAndWait();
+            return;
+        }
+        
         //Faz a conversão da data para o formato de data BR
         String dataBR = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
